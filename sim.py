@@ -91,6 +91,7 @@ if z <= 0.05 and x > 5 and count == 0:
     print(f"Time: {t}")
     count += 1
 
+# prints out coefficients and magnus force
 print(f"Drag Coefficient (C): {C:.3f}")
 print(f"Lift Coefficient (CL): {CL:.3f}")
 print(f"Magnus Force X: {magnusForceX:.3f}")
