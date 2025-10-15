@@ -5,13 +5,57 @@
   <title>Ball Flight Simulation</title>
   <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
   <style>
-    body { font-family: Arial; padding: 20px; }
-    button { padding: 10px 20px; margin-top: 10px; }
-    pre { background: #f0f0f0; padding: 10px; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+      background: #eef2f3;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 12px;
+      border: none;
+      border-radius: 6px;
+      background-color: #0077ff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fcc;
+    }
+
+    canvas {
+      display: block;
+      margin: 0 auto;
+      border: 2px solid #333;
+      border-radius: 8px;
+      background: white;
+    }
+
+    pre {
+      background: #f0f0f0;
+      padding: 10px;
+      text-align: left;
+      width: 90%;
+      margin: 20px auto;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
   </style>
 </head>
 <body>
-  <h1>Ball Flight Simulation (Pyodide)</h1>
+  <h1>🏌️ Ball Flight Simulation (Pyodide)</h1>
+
+  <!-- Canvas for trajectory visualization -->
+  <canvas id="simCanvas" width="800" height="400"></canvas>
+
   <button onclick="runPython()">▶️ Run Simulation</button>
 
   <h3>Output:</h3>
@@ -19,21 +63,31 @@
 
   <script>
     let pyodideReady = false;
+    const canvas = document.getElementById("simCanvas");
+    const ctx = canvas.getContext("2d");
 
     async function loadPyodideAndPackages() {
       window.pyodide = await loadPyodide();
       pyodideReady = true;
+      console.log("✅ Pyodide loaded");
     }
 
     async function runPython() {
       if (!pyodideReady) return;
       const output = document.getElementById("output");
       output.textContent = "Running...";
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       try {
         const response = await fetch("sim.py");
         const code = await response.text();
-        let result = await pyodide.runPythonAsync(code);
+
+        // Make the canvas accessible to Python
+        pyodide.globals.set("canvas", canvas);
+
+        // Run the Python simulation
+        const result = await pyodide.runPythonAsync(code);
+
         output.textContent = result || "Simulation complete.";
       } catch (err) {
         output.textContent = "Error:\n" + err;
