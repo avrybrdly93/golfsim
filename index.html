@@ -31,7 +31,7 @@
       output.textContent = "Running...";
 
       try {
-        const response = await fetch("script.py");
+        const response = await fetch("sim.py");
         const code = await response.text();
         let result = await pyodide.runPythonAsync(code);
         output.textContent = result || "Simulation complete.";
