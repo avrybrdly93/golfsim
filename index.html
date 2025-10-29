@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Golf Ball Flight Simulation</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; background: #f0f0f0; }
+    canvas { border: 1px solid #ccc; background: white; }
+    .controls { margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Golf Ball Flight Simulation</h1>
+  <canvas id="simCanvas" width="800" height="400"></canvas>
+  <div class="controls">
+    <label>Speed (m/s): <input id="speed" type="number" value="50"></label>
+    <label>Angle (deg): <input id="angle" type="number" value="12"></label>
+    <label>Spin (rpm): <input id="spin" type="number" value="-3000"></label>
+    <button onclick="runSim()">Run</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.26.0/full/pyodide.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
