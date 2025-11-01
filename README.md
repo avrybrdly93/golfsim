@@ -29,26 +29,26 @@ The project serves as both a **computational study** and a **validation tool**, 
 ### Equations and Models
 
 **Lift Coefficient (Dimpled Ball)**  
-\[
-C_L = 1.99S - 3.25S^2
-\]
+C_L = 1.99S − 3.25S²
+
 
 **Lift Coefficient (Smooth Ball)**  
-\[
-C_L =
-\begin{cases}
-8.833S^2 - 3.017S, & Re > 2\times10^5 \\
-8.833S^2 - 2.000S, & Re \le 2\times10^5
-\end{cases}
-\]
+C_L = 8.833S² − 3.017S    (for Re > 2×10⁵)
+C_L = 8.833S² − 2.000S    (for Re ≤ 2×10⁵)
+
 
 **Drag Coefficient (Dimpled Ball)**  
-Piecewise \( C_D(Re, S) \) model with four regimes: laminar, transitional, critical, and fully turbulent, based on literature-derived fits.
+C_D(Re, S) = {
+    0.2·S + 0.29                         for Re > 170,000
+    0.2·S + 0.28                         for 150,000 < Re ≤ 170,000
+    1.91×10⁻¹¹·Re² − 5.40×10⁻⁶·Re + 0.56 for 80,000 < Re ≤ 150,000
+    1.29×10⁻¹⁰·Re² − 2.59×10⁻⁵·Re + 1.50 for Re ≤ 80,000
+}
+
 
 **Drag Coefficient (Smooth Ball)**  
-\[
-C_D = \min(-0.1158(Re/10^5)^2 + 0.0131(Re/10^5) + 0.7408,\, 0.48)
-\]
+C_D = min( −0.1158(Re/10⁵)² + 0.0131(Re/10⁵) + 0.7408 , 0.48 )
+
 
 ---
 
